@@ -32,7 +32,7 @@ Neste repositório, todas as correções dos documentos **DAS** e **ADRs** foram
    *   **Exclusão Lógica**: Ao excluir, o contato é marcado como inativo (não some do arquivo).
    *   **Recuperação**: Tentar cadastrar um nome inativo oferece ao usuário a opção de reativá-lo.
 # 💻 Como Executar
-  *   **Clone o repositório**: git clone https://github.com/marquesclayton/ads3.contatos.git
+  *   **Clone o repositório**: `git clone https://github.com/lucioaguiardesouza/Agenda_fatesg.git`
    *   Abra o projeto no NetBeans IDE.
    *   Certifique-se de que o JDK está configurado (versão 21 ou superior).
    *   Execute a classe view.ListaContatos.
