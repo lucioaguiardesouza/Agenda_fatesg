@@ -1,4 +1,6 @@
-# ads3.contatos-camadas
+# 🎓 Projeto Acadêmico - 3º Período de ADS
+Este projeto faz parte da disciplina de **Arquitetura e Projeto de Software**, lecionada pelo professor **[@marquesclayton](https://github.com/marquesclayton)**. 
+Neste repositório, todas as correções dos documentos **DAS** e **ADRs** foram feitas por mim e estão disponíveis na pasta em PDF. Além disso, realizei algumas pequenas alterações no código do software em relação ao repositório original.
 
 # 📑 Agenda Swing: Evolução Arquitetural Didática
 ## Este projeto é uma aplicação de agenda pessoal desenvolvida em Java Swing. O objetivo central é demonstrar a evolução de um código funcional simples para uma Arquitetura em Camadas (Layered Architecture) profissional.
