@@ -1,0 +1,126 @@
+@startuml
+
+Agenda_Fatesg_Diagrams
+
+'--- Diagrama de Casos de Uso ---
+package "Casos de Uso" {
+    actor "Usuário" as User
+    
+    usecase "Listar Contatos" as UC1
+    usecase "Filtrar Contatos" as UC2
+    usecase "Cadastrar Contato" as UC3
+    usecase "Editar Contato" as UC4
+    usecase "Excluir Contato" as UC5
+    usecase "Visualizar Detalhes" as UC6
+    
+    User --> UC1
+    User --> UC2
+    User --> UC3
+    User --> UC4
+    User --> UC5
+    User --> UC6
+    
+    UC4 ..> UC1 : <<includes>>
+    UC5 ..> UC1 : <<includes>>
+}
+
+'--- Diagrama de Classes ---
+package "br.com.senai.ads3.agenda_fatesg" {
+    
+    package "domains" {
+        class Contato {
+            - String nome
+            - String email
+            - String telefone
+            + getNome()
+            + setNome()
+            + getEmail()
+            + setEmail()
+            + getTelefone()
+            + setTelefone()
+        }
+    }
+    
+    package "services" {
+        interface IContatoService {
+            + inserir(Contato): boolean
+            + alterar(Contato): boolean
+            + excluir(Contato): boolean
+            + excluir(String): boolean
+            + buscarTodos(): List<Contato>
+            + buscarTodosAtivos(): List<Contato>
+            + buscarTodosInativos(): List<Contato>
+            + contatoExiste(Contato): boolean
+            + reativaContato(Contato): boolean
+            + buscarPorNome(String): Contato
+            + listarPorNome(String): List<Contato>
+        }
+        
+        class ContatoService {
+            - IContatoRepository repository
+            + inserir(Contato): boolean
+            + alterar(Contato): boolean
+            + excluir(Contato): boolean
+            + buscarTodos(): List<Contato>
+        }
+        
+        IContatoService <|-- ContatoService
+    }
+    
+    package "repositories" {
+        interface IContatoRepository {
+            + inserir(Contato): boolean
+            + alterar(Contato): boolean
+            + desativar(Contato): boolean
+            + reativar(Contato): boolean
+            + contatoExiste(Contato): boolean
+            + buscarTodos(): List<Contato>
+            + buscarTodos(boolean): List<Contato>
+        }
+        
+        class ContatoRepository {
+            - List<Contato> database
+            + inserir(Contato): boolean
+            + alterar(Contato): boolean
+            + desativar(Contato): boolean
+        }
+        
+        IContatoRepository <|-- ContatoRepository
+    }
+    
+    package "pages" {
+        class Form_Listagem {
+            - IContatoService service
+            + carregarDados()
+            + filtrar()
+        }
+        
+        class Form_Cadastro {
+            - IContatoService service
+            - Contato contato
+            - TipoTela tipoTela
+            + salvar()
+            + fechar()
+        }
+    }
+    
+    package "enums" {
+        enum TipoTela {
+            INSERT
+            EDIT
+            VIEW
+        }
+    }
+    
+    ' Relacionamentos
+    ContatoService o-- IContatoRepository
+    Form_Listagem o-- IContatoService
+    Form_Cadastro o-- IContatoService
+    Form_Cadastro o-- Contato
+    Form_Cadastro o-- TipoTela
+    Form_Listagem ..> Form_Cadastro : "abre"
+    
+}
+
+
+@enduml
